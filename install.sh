@@ -4,6 +4,7 @@ ln -s ~/dotfiles/.vimrc ~/.vimrc
 ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
 ln -s ~/dotfiles/.bash_aliases ~/.bash_aliases
 
+
 #mkdir -p ~/.config/nvim
 #ln -s ~/dotfiles/nvim/init.vim ~/.config/nvim
 
@@ -15,4 +16,10 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 #curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 #    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+
+if [ ! -d "$DIRECTORY" ]; then
+    mkdir -p $HOME/dev
+fi
+
 echo 'source $HOME/.bash_profile' >> $HOME/.bashrc
+source $HOME/.bashrc
