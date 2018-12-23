@@ -17,12 +17,15 @@ Plug 'Townk/vim-autoclose'
 Plug 'sheerun/vim-polyglot'
 Plug 'scrooloose/nerdtree'
 Plug 'bling/vim-airline'
+
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
 Plug 'slashmili/alchemist.vim'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-rooter'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'w0rp/ale'
 Plug 'lifepillar/vim-solarized8'
 Plug 'tpope/vim-fugitive'
@@ -69,6 +72,9 @@ map <Up> <NOP>
 map <Right> <NOP>
 
 " ===> Terminal navigations
+
+au TerminalOpen * if &buftype == 'terminal' | setlocal bufhidden=hide | endif "terminal mode mappings
+
 if has('nvim')
     tnoremap <C-w>t :terminal<CR>
     nnoremap <C-w>t :terminal<CR>
@@ -92,13 +98,10 @@ else
     command! -nargs=* T :terminal <args>
     command! -nargs=* VT :vertical terminal <args>
 
-    tnoremap <C-w>t :vertical terminal<CR>
-    nnoremap <C-w>t :vertical terminal<CR>
-    inoremap <C-w>t :vertical terminal<CR>
+    tnoremap <C-w>t :terminal ++curwin<CR>
+    nnoremap <C-w>t :terminal ++curwin<CR>
+    inoremap <C-w>t :terminal ++curwin<CR>
 endif
-
-tnoremap <Esc> <C-\><C-n> "To map <Esc> to exit terminal-mode:
-au TerminalOpen * if &buftype == 'terminal' | setlocal bufhidden=hide | endif "terminal mode mappings
 
 " ===> Easier split navigations
 nnoremap <C-J> <C-W><C-J>
@@ -219,35 +222,19 @@ let g:NERDTreeWinPos = "left"
 
 nnoremap <silent> <F1> ::NERDTreeTabsToggle<CR>
 
-" Likewise, Files command with preview window
-command! -bang -nargs=? -complete=dir Files
-            \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-"
+function! s:find_git_root()
+  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+endfunction
+
 " ===> fzf
-nnoremap <c-t> :FZF<cr>
-nnoremap <silent><c-b> :call fzf#run({
-            \   'source':  reverse(<sid>buflist()),
-            \   'sink':    function('<sid>bufopen'),
-            \   'options': '+m',
-            \   'down':    len(<sid>buflist()) + 2
-            \ })<CR>
+nnoremap <c-t> :Files<cr>
+nnoremap <silent><c-b> :Buffers<cr>
 
 let g:fzf_layout = { 'down': '~30%' }
 let g:fzf_action = {
             \ 'ctrl-s': 'split',
             \ 'ctrl-v': 'vsplit'
             \ }
-
-function! s:buflist()
-    redir => ls
-    silent ls
-    redir END
-    return split(ls, '\n')
-endfunction
-
-function! s:bufopen(e)
-    execute 'buffer' matchstr(a:e, '^[ 0-9]*')
-endfunction
 
 "hide statusline
 autocmd! FileType fzf
