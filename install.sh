@@ -2,8 +2,7 @@
 
 ln -s ~/dotfiles/.vimrc ~/.vimrc
 ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
-ln -s ~/dotfiles/.bash_aliases ~/.bash_aliases
-
+ln -s ~/dotfiles/.bash_profile ~/.bash_profile
 
 #mkdir -p ~/.config/nvim
 #ln -s ~/dotfiles/nvim/init.vim ~/.config/nvim
@@ -22,4 +21,5 @@ if [ ! -d "$DIRECTORY" ]; then
 fi
 
 echo 'source $HOME/.bash_profile' >> $HOME/.bashrc
+source $HOME/.bash_profile
 source $HOME/.bashrc

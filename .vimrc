@@ -72,7 +72,7 @@ map <Up> <NOP>
 map <Right> <NOP>
 
 " ===> Terminal navigations
-
+tnoremap <Esc> <C-\><C-n> "To map <Esc> to exit terminal-mode:
 au TerminalOpen * if &buftype == 'terminal' | setlocal bufhidden=hide | endif "terminal mode mappings
 
 if has('nvim')

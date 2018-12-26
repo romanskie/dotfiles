@@ -13,5 +13,5 @@ alias c='clear'
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
-export GOPATH=$HOME/dev/go
+export GOPATH=$HOME/go
 export PATH=$PATH:$(go env GOPATH)/bin
