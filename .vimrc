@@ -72,38 +72,6 @@ map <Down> <NOP>
 map <Up> <NOP>
 map <Right> <NOP>
 
-" ===> Terminal navigations
-tnoremap <Esc> <C-\><C-n> "To map <Esc> to exit terminal-mode:
-au TerminalOpen * if &buftype == 'terminal' | setlocal bufhidden=hide | endif "terminal mode mappings
-
-if has('nvim')
-    tnoremap <C-w>t :terminal<CR>
-    nnoremap <C-w>t :terminal<CR>
-    inoremap <C-w>t :terminal<CR>
-    command! -nargs=* T split | terminal <args>
-    command! -nargs=* VT vsplit | terminal <args>
-    "To use `ALT+{h,j,k,l}` to navigate windows from any mode:
-    tnoremap <A-h> <C-\><C-N><C-w>h
-    tnoremap <A-j> <C-\><C-N><C-w>j
-    tnoremap <A-k> <C-\><C-N><C-w>k
-    tnoremap <A-l> <C-\><C-N><C-w>l
-    inoremap <A-h> <C-\><C-N><C-w>h
-    inoremap <A-j> <C-\><C-N><C-w>j
-    inoremap <A-k> <C-\><C-N><C-w>k
-    inoremap <A-l> <C-\><C-N><C-w>l
-    nnoremap <A-h> <C-w>h
-    nnoremap <A-j> <C-w>j
-    nnoremap <A-k> <C-w>k
-    nnoremap <A-l> <C-w>l
-else
-    command! -nargs=* T :terminal <args>
-    command! -nargs=* VT :vertical terminal <args>
-
-    tnoremap <C-w>t :terminal ++curwin<CR>
-    nnoremap <C-w>t :terminal ++curwin<CR>
-    inoremap <C-w>t :terminal ++curwin<CR>
-endif
-
 " ===> Easier split navigations
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>

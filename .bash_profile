@@ -1,7 +1,8 @@
-
 source $HOME/.bashrc
+
 ##alias stuff#
 alias ls='ls -a'
+alias c='clear'
 alias dotfiles='cd ~/dotfiles'
 alias dev='cd ~/dev'
 alias ping='ping -c 5'
