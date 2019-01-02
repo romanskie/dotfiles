@@ -16,6 +16,10 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 #    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 
+# install tmux plugin manager
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+
 if [ ! -d "$DIRECTORY" ]; then
     mkdir -p $HOME/dev
 fi

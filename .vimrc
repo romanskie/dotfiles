@@ -29,6 +29,7 @@ Plug 'airblade/vim-rooter'
 Plug 'w0rp/ale'
 Plug 'lifepillar/vim-solarized8'
 Plug 'tpope/vim-fugitive'
+Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
 
@@ -123,10 +124,15 @@ augroup END
 
 " ====> Using Buffers like Tabs
 set hidden
-nnoremap <c-j> :bprevious<CR>
-nnoremap <c-k>   :bnext<CR>
+
+"nnoremap <c-j> :bprevious<CR>
+"nnoremap <c-k>   :bnext<CR>
+nnoremap <Tab> :bnext<CR>
+nnoremap <S-Tab> :bprevious<CR>
+
 "nnoremap <c-x> :bp <BAR> bd #<CR>
 nnoremap <c-c> :bp <BAR> bd #<CR>
+nnoremap <c-q> :bp <BAR> bd #<CR>
 
 map <Esc><Esc> :w<CR>
 

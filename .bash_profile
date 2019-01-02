@@ -1,3 +1,5 @@
+
+source $HOME/.bashrc
 ##alias stuff#
 alias ls='ls -a'
 alias dotfiles='cd ~/dotfiles'
@@ -15,3 +17,4 @@ export EDITOR="$VISUAL"
 
 export GOPATH=$HOME/go
 export PATH=$PATH:$(go env GOPATH)/bin
+
