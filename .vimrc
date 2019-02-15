@@ -17,6 +17,7 @@ Plug 'Townk/vim-autoclose'
 Plug 'sheerun/vim-polyglot'
 Plug 'scrooloose/nerdtree'
 Plug 'bling/vim-airline'
+Plug 'tpope/vim-eunuch'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -26,6 +27,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-rooter'
 "Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
 Plug 'w0rp/ale'
 Plug 'lifepillar/vim-solarized8'
 Plug 'tpope/vim-fugitive'
@@ -45,7 +47,7 @@ map q <Nop>
 autocmd BufWritePre * :%s/\s\+$//e "/dealing with whitespaces
 
 " ====> mappings
-set clipboard+=unnamedplus "clipboard
+set clipboard=unnamed
 
 " Visual linewise up and down by default (and use gj gk to go quicker)
 nnoremap j gj
@@ -263,4 +265,9 @@ noremap <expr><C-h> deoplete#undo_completion()
 
 " Redraw candidates
 inoremap <expr><C-l> deoplete#refresh()
+
+" XML and JSON formatting via python
+com! FormatXML :%!python3 -c "import xml.dom.minidom, sys; print(xml.dom.minidom.parse(sys.stdin).toprettyxml(newl=''))"
+com! FormatJSON %!python -m json.tool
+
 
