@@ -10,28 +10,37 @@ else
     Plug 'Shougo/deoplete.nvim'
     Plug 'roxma/nvim-yarp'
     Plug 'roxma/vim-hug-neovim-rpc'
+    Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': './install.sh'
+    \ }
 endif
 
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'Townk/vim-autoclose'
 Plug 'sheerun/vim-polyglot'
-Plug 'scrooloose/nerdtree'
-Plug 'bling/vim-airline'
+Plug 'Townk/vim-autoclose'
+Plug 'w0rp/ale'
+
 Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-rooter'
+Plug 'mhinz/vim-grepper'
 
-Plug 'slashmili/alchemist.vim'
+Plug 'lifepillar/vim-solarized8'
+Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
-Plug 'airblade/vim-rooter'
-"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
-Plug 'w0rp/ale'
-Plug 'lifepillar/vim-solarized8'
-Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
 Plug 'christoomey/vim-tmux-navigator'
+
+" haskell
+"Plug 'eagletmt/neco-ghc'
+"Plug 'eagletmt/ghcmod-vim'
 
 call plug#end()
 
@@ -270,4 +279,12 @@ inoremap <expr><C-l> deoplete#refresh()
 com! FormatXML :%!python3 -c "import xml.dom.minidom, sys; print(xml.dom.minidom.parse(sys.stdin).toprettyxml(newl=''))"
 com! FormatJSON %!python -m json.tool
 
+" Grepper Settings
+let g:grepper               = {}
+let g:grepper.tools         = ['grep']
+let g:grepper.jump          = 1
+let g:grepper.simple_prompt = 1
+let g:grepper.quickfix      = 0
 
+" haskell
+" let g:LanguageClient_serverCommands = { 'haskell': ['hie-wrapper'] }
