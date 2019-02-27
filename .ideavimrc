@@ -1,0 +1,51 @@
+set number
+set incsearch hlsearch
+set ignorecase smartcase
+set clipboard=unnamed
+set scrolloff=5
+set showmode
+set surround
+
+set ruler
+
+nnoremap <C-W>q <C-W>o
+nnoremap <C-C> :action CloseContent<CR>
+nnoremap <C-T> :action GotoFile<CR>
+
+" ===> Easier split navigations
+nnoremap <C-H> <C-W>h
+nnoremap <C-J> <C-W>j
+nnoremap <C-K> <C-W>k
+nnoremap <C-L> <C-W>l
+
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
+
+nnoremap J 5j
+nnoremap K 5k
+vnoremap J 5j
+vnoremap K 5k
+
+nnoremap ; :
+
+map q <Nop>
+
+map <Left> <NOP>
+map <Down> <NOP>
+map <Up> <NOP>
+map <Right> <NOP>
+
+set splitbelow
+set splitright
+
+set wildmenu
+
+" cancle search with esc
+nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
+
+map <Esc><Esc> :w<CR>
+
+
+
