@@ -11,6 +11,7 @@ set ruler
 nnoremap <C-W>q <C-W>o
 nnoremap <C-C> :action CloseContent<CR>
 nnoremap <C-T> :action GotoFile<CR>
+nnoremap <C-B> :action TabList<CR>
 
 " ===> Easier split navigations
 nnoremap <C-H> <C-W>h
