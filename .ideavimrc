@@ -8,10 +8,10 @@ set surround
 
 set ruler
 
-nnoremap <C-W>q <C-W>o
+nnoremap <C-W>q <C-W>c
 nnoremap <C-C> :action CloseContent<CR>
 nnoremap <C-T> :action GotoFile<CR>
-nnoremap <C-B> :action TabList<CR>
+nnoremap <r><n> :action RenameElement<CR>
 
 " ===> Easier split navigations
 nnoremap <C-H> <C-W>h
