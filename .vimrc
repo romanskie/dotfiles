@@ -38,6 +38,9 @@ Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'christoomey/vim-tmux-navigator'
 
+Plug 'tpope/vim-fireplace'
+Plug 'venantius/vim-cljfmt'
+Plug 'guns/vim-clojure-static'
 " haskell
 "Plug 'eagletmt/neco-ghc'
 "Plug 'eagletmt/ghcmod-vim'
@@ -56,7 +59,7 @@ map q <Nop>
 autocmd BufWritePre * :%s/\s\+$//e "/dealing with whitespaces
 
 " ====> mappings
-set clipboard=unnamed
+set clipboard+=unnamedplus
 
 " Visual linewise up and down by default (and use gj gk to go quicker)
 nnoremap j gj
@@ -288,3 +291,6 @@ let g:grepper.quickfix      = 0
 
 " haskell
 " let g:LanguageClient_serverCommands = { 'haskell': ['hie-wrapper'] }
+"
+" clojure
+let g:clj_fmt_autosave = 0
