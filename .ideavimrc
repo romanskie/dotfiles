@@ -8,10 +8,11 @@ set surround
 
 set ruler
 
+
 nnoremap <C-W>q <C-W>c
 nnoremap <C-C> :action CloseContent<CR>
 nnoremap <C-T> :action GotoFile<CR>
-nnoremap <r><n> :action RenameElement<CR>
+nnoremap <C-F> :action FindInPath<cr>
 
 " ===> Easier split navigations
 nnoremap <C-H> <C-W>h
@@ -30,6 +31,40 @@ vnoremap J 5j
 vnoremap K 5k
 
 nnoremap ; :
+
+let mapleader = " "
+
+nnoremap <leader>f :action FindInPath<cr>
+nnoremap <leader>t :action GotoFile<CR>
+
+nnoremap <leader>fu :action FindUsages<cr>
+nnoremap <leader>su :action ShowUsages<cr>
+nnoremap <leader>cv :action ChangeView<cr>
+nnoremap <leader>bb :action ToggleLineBreakpoint<cr>
+nnoremap <leader>br :action ViewBreakpoints<cr>
+nnoremap <leader>ic :action InspectCode<cr>
+nnoremap <leader>oi :action OptimizeImports<cr>
+nnoremap <leader>rn :action RenameElement<cr>
+nnoremap <leader>re :action RenameElement<cr>
+nnoremap <leader>rf :action RenameFile<cr>
+nnoremap <leader>gq :action ReformatCode<cr>
+nnoremap <leader>mv :action ActivateMavenProjectsToolWindow<cr>
+nnoremap <leader>dd :action Debug<cr>
+nnoremap <leader>dc :action ChooseDebugConfiguration<cr>
+nnoremap <leader>rr :action Run<cr>
+nnoremap <leader>rc :action ChooseRunConfiguration<cr>
+
+nnoremap <leader>ga :action GotoAction<cr>
+nnoremap <leader>gi :action GotoImplementation<cr>
+nnoremap <leader>gs :action GotoSuperMethod<cr>
+nnoremap <leader>gd :action GotoDeclaration<cr>
+nnoremap <leader>gt :action GotoTest<cr>
+nnoremap <leader>gr :action GotoRelated<cr>
+nnoremap <leader>gb :action Annotate<cr>
+nnoremap <leader>tl Vy<cr>:action ActivateTerminalToolWindow<cr>
+nnoremap <leader>tl y<cr>:action ActivateTerminalToolWindow<cr>
+nnoremap <leader>e :action GotoNextError<cr>
+nnoremap <leader>E :action GotoPreviousError<cr>
 
 map q <Nop>
 
