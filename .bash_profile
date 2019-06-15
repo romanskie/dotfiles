@@ -15,6 +15,8 @@ export EDITOR="$VISUAL"
 export GOPATH=$HOME/go
 export PATH=$PATH:$(go env GOPATH)/bin
 
+export PATH="$PATH":/home/rschader/.lsp
+
 # Avoid duplicates
 export HISTCONTROL=ignoredups:erasedups
 # When the shell exits, append to the history file instead of overwriting it
