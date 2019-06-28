@@ -15,6 +15,8 @@ export EDITOR="$VISUAL"
 export GOPATH=$HOME/go
 export PATH=$PATH:$(go env GOPATH)/bin
 
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
+
 export PATH="$PATH":/home/rschader/.lsp
 
 # Avoid duplicates

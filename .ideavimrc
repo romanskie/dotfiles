@@ -82,6 +82,3 @@ set wildmenu
 nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
 
 map <Esc><Esc> :w<CR>
-
-
-

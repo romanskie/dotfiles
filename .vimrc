@@ -84,6 +84,7 @@ set so=7
 " Files, backups and undo
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
 set nobackup
+set nowritebackup
 set nowb
 set noswapfile
 
@@ -106,6 +107,12 @@ set wrap "Wrap lines"
 set hlsearch
 set ignorecase
 set smartcase
+
+" Smaller updatetime for CursorHold & CursorHoldI
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
 
 " Turn persistent undo on
 " means that you can undo even when you close a buffer/VIM
@@ -164,6 +171,16 @@ map <Esc><Esc> :w<CR>
 " cancle search with esc
 nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
 
+" ===> Grepper Settings
+let g:grepper               = {}
+let g:grepper.tools         = ['git', 'grep']
+let g:grepper.jump          = 1
+let g:grepper.simple_prompt = 1
+let g:grepper.quickfix      = 0
+
+nnoremap <silent><c-f> :Grepper<cr>
+nnoremap <silent><leader>f :Grepper<cr>
+
 " =====> Nerdtree
 let NERDTreeShowHidden=1 "Display hidden files:
 let g:NERDTreeWinSize=40
@@ -173,15 +190,18 @@ let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let g:NERDTreeWinPos = "left"
 
-nnoremap <silent> <F1> ::NERDTreeTabsToggle<CR>
+nnoremap <silent><F1> :NERDTreeTabsToggle<CR>
 
 function! s:find_git_root()
     return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
 endfunction
 
 " ===> FZF
-nnoremap <c-t> :Files<cr>
+nnoremap <silent><c-t> :Files<cr>
+nnoremap <silent><leader>t :Files<cr>
+
 nnoremap <silent><c-b> :Buffers<cr>
+nnoremap <silent><leader>b :Buffers<cr>
 
 let g:fzf_layout = { 'down': '~30%' }
 let g:fzf_action = {
@@ -204,29 +224,10 @@ let g:airline#extensions#tmuxline#enabled = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 
-" ===> Grepper Settings
-let g:grepper               = {}
-let g:grepper.tools         = ['grep']
-let g:grepper.jump          = 1
-let g:grepper.simple_prompt = 1
-let g:grepper.quickfix      = 0
-
-" clojure fmt
-let g:clj_fmt_autosave = 1
-
 " ===> coc nvim
 if has('nvim')
     let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
     let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
-
-    " Use tab for trigger completion with characters ahead and navigate.
-    " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-    inoremap <silent><expr> <TAB>
-                \ pumvisible() ? "\<C-n>" :
-                \ <SID>check_back_space() ? "\<TAB>" :
-                \ coc#refresh()
-
-    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
     " Movement within 'ins-completion-menu'
     imap <expr><C-j>   pumvisible() ? "\<Down>" : "\<C-j>"
@@ -234,12 +235,14 @@ if has('nvim')
     imap <expr><C-n>   pumvisible() ? "\<Down>" : "\<C-n>"
     imap <expr><C-p>   pumvisible() ? "\<Up>" : "\<C-p>"
 
-
     " Remap keys for gotos
-    nmap <leader>gd <Plug>(coc-definition)
-    nmap <leader>ref <Plug>(coc-references)
-    nmap <leader>rn <Plug>(coc-rename)
-    nmap <leader>re <Plug>(coc-rename)
+    nmap <silent><leader>gd <Plug>(coc-definition)
+    nmap <silent><leader>gy <Plug>(coc-type-definition)
+    nmap <silent><leader>gi <Plug>(coc-implementation)
+    nmap <silent><leader>gr <Plug>(coc-references)
+
+    nmap <silent><leader>rn <Plug>(coc-rename)
+    nmap <silent><leader>re <Plug>(coc-rename)
 
     command! -nargs=0 Format :call CocAction('format')
     let g:coc_enable_locationlist = 0
@@ -249,6 +252,10 @@ if has('nvim')
     nmap <leader>e <Plug>(coc-diagnostic-next)
     nmap <leader>E <Plug>(coc-diagnostic-prev)
     nnoremap <leader>doc :call <SID>show_documentation()<CR>
+
+    nmap <leader>F <Plug>(coc-format)
+    vmap <leader>f <Plug>(coc-format-selected)
+    nmap <leader>f <Plug>(coc-format-selected)
 
     function! s:show_documentation()
         if &filetype == 'vim'
@@ -266,9 +273,7 @@ if has('nvim')
     " Highlight symbol under cursor on CursorHold
     autocmd CursorHold * silent call CocActionAsync('highlight')
 
-    nmap <leader>F <Plug>(coc-format)
-    vmap <leader>f <Plug>(coc-format-selected)
-    nmap <leader>f <Plug>(coc-format-selected)
+    "clojure
 
     nnoremap <silent> crcc :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'cycle-coll', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
     nnoremap <silent> crth :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-first', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
@@ -318,6 +323,5 @@ autocmd BufReadPost *
             \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
             \   exe "normal g`\"" |
             \ endif
-
 
 
