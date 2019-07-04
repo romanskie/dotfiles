@@ -19,6 +19,8 @@ export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
 
 export PATH="$PATH":/home/rschader/.lsp
 
+export PATH="$PATH":/home/rschader/.bloop
+
 # Avoid duplicates
 export HISTCONTROL=ignoredups:erasedups
 # When the shell exits, append to the history file instead of overwriting it

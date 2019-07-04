@@ -253,9 +253,9 @@ if has('nvim')
     nmap <leader>E <Plug>(coc-diagnostic-prev)
     nnoremap <leader>doc :call <SID>show_documentation()<CR>
 
-    nmap <leader>F <Plug>(coc-format)
-    vmap <leader>f <Plug>(coc-format-selected)
-    nmap <leader>f <Plug>(coc-format-selected)
+    "nmap <leader>F <Plug>(coc-format)
+    "vmap <leader>f <Plug>(coc-format-selected)
+    "nmap <leader>f <Plug>(coc-format-selected)
 
     function! s:show_documentation()
         if &filetype == 'vim'
@@ -300,8 +300,13 @@ if has('nvim')
 
 endif
 
+
 " ===> Commands
 autocmd BufWritePre * :%s/\s\+$//e "/dealing with whitespaces
+
+" add yaml stuffs
+au! BufNewFile,BufReadPost *.{yaml,yml,jinja} set filetype=yaml
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 augroup windows_and_buffers
     au!

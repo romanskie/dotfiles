@@ -36,6 +36,7 @@ let mapleader = " "
 
 nnoremap <leader>f :action FindInPath<cr>
 nnoremap <leader>t :action GotoFile<CR>
+nnoremap <leader>r :action ReplaceInPath<CR>
 
 nnoremap <leader>fu :action FindUsages<cr>
 nnoremap <leader>su :action ShowUsages<cr>

@@ -32,4 +32,3 @@ alias tm-a='tmux attach-session -t'
 alias tm-kill='tmux kill-session -t'
 alias tm-k='tmux kill-session -t'
 
-
