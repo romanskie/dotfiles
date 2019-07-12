@@ -5,7 +5,7 @@ let s:vim_plugged_path = $vim_path.'/plugged'
 call plug#begin(s:vim_plugged_path)
 
 if has('nvim')
-    Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 endif
 
 Plug 'sheerun/vim-polyglot'
@@ -29,7 +29,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'christoomey/vim-tmux-navigator'
 
-Plug 'venantius/vim-cljfmt'
 Plug 'tpope/vim-fireplace'
 Plug 'vim-scripts/paredit.vim'
 
@@ -138,6 +137,14 @@ nnoremap J 5j
 nnoremap K 5k
 vnoremap J 5j
 vnoremap K 5k
+
+" move lines
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
 
 nnoremap ; :
 
