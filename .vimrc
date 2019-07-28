@@ -28,9 +28,10 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'luochen1990/rainbow'
 
 Plug 'tpope/vim-fireplace'
-Plug 'vim-scripts/paredit.vim'
+"Plug 'vim-scripts/paredit.vim'
 
 call plug#end()
 
@@ -39,6 +40,7 @@ syntax on
 set termguicolors
 set background=light
 colorscheme solarized8
+let g:rainbow_active = 1
 
 set clipboard+=unnamedplus
 
@@ -146,6 +148,7 @@ inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
+
 nnoremap ; :
 
 " When jump to next match also center screen
@@ -165,6 +168,9 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+nnoremap <C-W><<> <C-W><r>
+nnoremap <C-W><>> <C-W><R>
 
 " Using Buffers like Tabs
 nnoremap <Tab> :bnext<CR>
@@ -235,6 +241,7 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 if has('nvim')
     let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
     let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+    let g:LanguageClient_settingsPath=".lsp/settings.json"
 
     " Movement within 'ins-completion-menu'
     imap <expr><C-j>   pumvisible() ? "\<Down>" : "\<C-j>"

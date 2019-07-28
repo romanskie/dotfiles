@@ -17,9 +17,11 @@ export PATH=$PATH:$(go env GOPATH)/bin
 
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
 
-export PATH="$PATH":/home/rschader/.lsp
+#export PATH="$PATH":/home/rschader/.lsp
 
-export PATH="$PATH":/home/rschader/.bloop
+#export PATH=$PATH:/home/rschader/lsp/clojure-lsp.jar
+
+#export PATH="$PATH":/home/rschader/.bloop
 
 # Avoid duplicates
 export HISTCONTROL=ignoredups:erasedups

@@ -16,6 +16,7 @@ cleanup() {
     rm -rf ~/.bash_profile
     rm -rf ~/.bash_aliases
     rm -rf ~/.bashrc
+    rm -rf ~/lsp
     println "cleanup done"
     exit 1
 }
@@ -36,6 +37,10 @@ sudo apt-get install xclip
 if [ ! -d "~/.config/nvim" ]; then
     mkdir -p ~/.config/nvim
     ln -s ~/dotfiles/nvim/init.vim ~/.config/nvim
+fi
+
+if [ ! -d "~/lsp" ]; then
+    mkdir -p ~/lsp
 fi
 
 ln -s ~/dotfiles/.vimrc ~/.vimrc
