@@ -17,6 +17,7 @@ cleanup() {
     rm -rf ~/.bash_aliases
     rm -rf ~/.bashrc
     rm -rf ~/lsp
+    rm -rf ~/.lein
     println "cleanup done"
     exit 1
 }
@@ -24,31 +25,26 @@ cleanup() {
 # echo an error message before exiting
 trap cleanup EXIT
 
-# Neovim
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-# install tmux plugin manager
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
-# install xclip
-sudo apt-get install xclip
-
 if [ ! -d "~/.config/nvim" ]; then
     mkdir -p ~/.config/nvim
-    ln -s ~/dotfiles/nvim/init.vim ~/.config/nvim
 fi
 
 if [ ! -d "~/lsp" ]; then
     mkdir -p ~/lsp
 fi
 
+ln -s ~/dotfiles/nvim/init.vim ~/.config/nvim
 ln -s ~/dotfiles/.vimrc ~/.vimrc
 ln -s ~/dotfiles/.ideavimrc ~/.ideavimrc
 ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf
 ln -s ~/dotfiles/.bash_profile ~/.bash_profile
 ln -s ~/dotfiles/.bash_aliases ~/.bash_aliases
 ln -s ~/dotfiles/.bashrc ~/.bashrc
+ln -s ~/dotfiles/.lein ~/.lein
 
-source ~/.bash_profile
-source ~/.bashrc
+# Neovim
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+# install tmux plugin manager
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

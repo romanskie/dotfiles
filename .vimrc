@@ -4,10 +4,6 @@ let s:vim_plugged_path = $vim_path.'/plugged'
 
 call plug#begin(s:vim_plugged_path)
 
-if has('nvim')
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-endif
-
 Plug 'sheerun/vim-polyglot'
 Plug 'Townk/vim-autoclose'
 
@@ -31,7 +27,12 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'luochen1990/rainbow'
 
 Plug 'tpope/vim-fireplace'
-"Plug 'vim-scripts/paredit.vim'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'guns/vim-sexp'
+
+if s:is_nvim
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+endif
 
 call plug#end()
 
@@ -238,10 +239,42 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 
 " ===> coc nvim
-if has('nvim')
+if s:is_nvim
+
     let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
     let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
     let g:LanguageClient_settingsPath=".lsp/settings.json"
+    let g:coc_enable_locationlist = 0
+
+    " Highlight symbol under cursor on CursorHold
+    autocmd CursorHold * silent call CocActionAsync('highlight')
+
+    autocmd User CocLocationsChange CocList --normal location
+
+    autocmd BufReadCmd,FileReadCmd,SourceCmd jar:file://* call s:LoadClojureContent(expand("<amatch>"))
+
+    command! -nargs=0 Format :call CocAction('format')
+
+    function! s:show_documentation()
+        if &filetype == 'vim'
+            execute 'h '.expand('<cword>')
+        else
+            call CocAction('doHover')
+        endif
+    endfunction
+
+    function! Expand(exp) abort
+        let l:result = expand(a:exp)
+        return l:result ==# '' ? '' : "file://" . l:result
+    endfunction
+
+    function! s:LoadClojureContent(uri)
+        setfiletype clojure
+        let content = CocRequest('clojure-lsp', 'clojure/dependencyContents', {'uri': a:uri})
+        call setline(1, split(content, "\n"))
+        setl nomodified
+        setl readonly
+    endfunction
 
     " Movement within 'ins-completion-menu'
     imap <expr><C-j>   pumvisible() ? "\<Down>" : "\<C-j>"
@@ -258,9 +291,6 @@ if has('nvim')
     nmap <silent><leader>rn <Plug>(coc-rename)
     nmap <silent><leader>re <Plug>(coc-rename)
 
-    command! -nargs=0 Format :call CocAction('format')
-    let g:coc_enable_locationlist = 0
-    autocmd User CocLocationsChange CocList --normal location
 
     "inoremap <silent><expr> <c-space> coc#refresh()
     nmap <leader>e <Plug>(coc-diagnostic-next)
@@ -270,22 +300,6 @@ if has('nvim')
     "nmap <leader>F <Plug>(coc-format)
     "vmap <leader>f <Plug>(coc-format-selected)
     "nmap <leader>f <Plug>(coc-format-selected)
-
-    function! s:show_documentation()
-        if &filetype == 'vim'
-            execute 'h '.expand('<cword>')
-        else
-            call CocAction('doHover')
-        endif
-    endfunction
-
-    function! Expand(exp) abort
-        let l:result = expand(a:exp)
-        return l:result ==# '' ? '' : "file://" . l:result
-    endfunction
-
-    " Highlight symbol under cursor on CursorHold
-    autocmd CursorHold * silent call CocActionAsync('highlight')
 
     "clojure
 
@@ -302,15 +316,6 @@ if has('nvim')
     nnoremap <silent> cram :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'add-missing-libspec', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
     nnoremap <silent> crcn :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'clean-ns', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
     nnoremap <silent> cref :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'extract-function', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1, input('Function name: ')]})<CR>
-
-    autocmd BufReadCmd,FileReadCmd,SourceCmd jar:file://* call s:LoadClojureContent(expand("<amatch>"))
-    function! s:LoadClojureContent(uri)
-        setfiletype clojure
-        let content = CocRequest('clojure-lsp', 'clojure/dependencyContents', {'uri': a:uri})
-        call setline(1, split(content, "\n"))
-        setl nomodified
-        setl readonly
-    endfunction
 
 endif
 
