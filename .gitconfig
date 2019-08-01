@@ -1,10 +1,10 @@
 [user]
 	name = Roman Schader
 [core]
-	editor = nvim
+	editor = vi
 [alias]
 	plog = log --graph --pretty=format:'%h -%d %s %n' --abbrev-commit --date=relative --branches
 [merge]
-    tool = nvim
+    tool = vi
 [mergetool "nvim"]
-    cmd = nvim -f -c \"Gvdiffsplit!\" \"$MERGED\"
+    cmd = vi -f -c \"Gvdiffsplit!\" \"$MERGED\"
