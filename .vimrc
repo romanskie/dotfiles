@@ -149,7 +149,6 @@ inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
-
 nnoremap ; :
 
 " When jump to next match also center screen
@@ -196,6 +195,8 @@ nnoremap <silent><c-f> :Grepper<cr>
 nnoremap <silent><leader>f :Grepper<cr>
 
 " =====> Nerdtree
+autocmd VimEnter * NERDTree
+
 let NERDTreeShowHidden=1 "Display hidden files:
 let g:NERDTreeWinSize=40
 let NERDTreeIgnore=['\.DS_Store', '\~$', '\.swp']
@@ -204,11 +205,8 @@ let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let g:NERDTreeWinPos = "left"
 
-nnoremap <silent><F1> :NERDTreeTabsToggle<CR>
-
-function! s:find_git_root()
-    return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
-endfunction
+"nnoremap <silent><F1> :NERDTreeTabsToggle<CR>
+nnoremap <silent><F1> :NERDTreeToggle<Enter>
 
 " ===> FZF
 nnoremap <silent><c-t> :Files<cr>
@@ -288,9 +286,9 @@ if s:is_nvim
     nmap <silent><leader>gi <Plug>(coc-implementation)
     nmap <silent><leader>gr <Plug>(coc-references)
 
+    nmap <silent><leader>rf :Format<cr>
     nmap <silent><leader>rn <Plug>(coc-rename)
     nmap <silent><leader>re <Plug>(coc-rename)
-
 
     "inoremap <silent><expr> <c-space> coc#refresh()
     nmap <leader>e <Plug>(coc-diagnostic-next)
