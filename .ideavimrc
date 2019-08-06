@@ -8,7 +8,6 @@ set surround
 
 set ruler
 
-
 nnoremap <C-W>q <C-W>c
 nnoremap <C-C> :action CloseContent<CR>
 nnoremap <C-T> :action GotoFile<CR>

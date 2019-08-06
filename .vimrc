@@ -149,7 +149,7 @@ inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
-nnoremap ; :
+"nnoremap ;
 
 " When jump to next match also center screen
 nnoremap n nzz
@@ -173,8 +173,11 @@ nnoremap <C-W><<> <C-W><r>
 nnoremap <C-W><>> <C-W><R>
 
 " Using Buffers like Tabs
-nnoremap <Tab> :bnext<CR>
-nnoremap <S-Tab> :bprevious<CR>
+"nnoremap <Tab> :bnext<CR>
+"nnoremap <S-Tab> :bprevious<CR>
+
+nnoremap <c-n> :bnext<CR>
+nnoremap <c-p> :bprevious<CR>
 nnoremap <c-c> :bp <BAR> bd #<CR>
 nnoremap <c-q> :bp <BAR> bd #<CR>
 
@@ -192,11 +195,8 @@ let g:grepper.simple_prompt = 1
 let g:grepper.quickfix      = 0
 
 nnoremap <silent><c-f> :Grepper<cr>
-nnoremap <silent><leader>f :Grepper<cr>
 
 " =====> Nerdtree
-autocmd VimEnter * NERDTree
-
 let NERDTreeShowHidden=1 "Display hidden files:
 let g:NERDTreeWinSize=40
 let NERDTreeIgnore=['\.DS_Store', '\~$', '\.swp']
@@ -206,14 +206,16 @@ let NERDTreeDirArrows = 1
 let g:NERDTreeWinPos = "left"
 
 "nnoremap <silent><F1> :NERDTreeTabsToggle<CR>
-nnoremap <silent><F1> :NERDTreeToggle<Enter>
+"nnoremap <silent><F1> :NERDTreeToggle<Enter>
+"noremap <silent><c-m> :NERDTreeToggle .<Enter>
+noremap <silent><c-g> :NERDTreeToggle .<Enter>
 
 " ===> FZF
 nnoremap <silent><c-t> :Files<cr>
-nnoremap <silent><leader>t :Files<cr>
+"nnoremap <silent><leader>t :Files<cr>
 
 nnoremap <silent><c-b> :Buffers<cr>
-nnoremap <silent><leader>b :Buffers<cr>
+"nnoremap <silent><leader>b :Buffers<cr>
 
 let g:fzf_layout = { 'down': '~30%' }
 let g:fzf_action = {
