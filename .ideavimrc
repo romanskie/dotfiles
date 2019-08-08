@@ -12,6 +12,9 @@ nnoremap <C-W>q <C-W>c
 nnoremap <C-C> :action CloseContent<CR>
 nnoremap <C-T> :action GotoFile<CR>
 nnoremap <C-F> :action FindInPath<cr>
+nnoremap <C-B> :action RecentFiles<cr>
+
+nnoremap <C-G> :action ActivateProjectToolWindow<cr>
 
 " ===> Easier split navigations
 nnoremap <C-H> <C-W>h
@@ -46,8 +49,9 @@ nnoremap <leader>ic :action InspectCode<cr>
 nnoremap <leader>oi :action OptimizeImports<cr>
 nnoremap <leader>rn :action RenameElement<cr>
 nnoremap <leader>re :action RenameElement<cr>
-nnoremap <leader>rf :action RenameFile<cr>
-nnoremap <leader>gq :action ReformatCode<cr>
+"nnoremap <leader>rf :action RenameFile<cr>
+"nnoremap <leader>gq :action ReformatCode<cr>
+nnoremap <leader>rf :action ReformatCode<cr>
 nnoremap <leader>mv :action ActivateMavenProjectsToolWindow<cr>
 nnoremap <leader>dd :action Debug<cr>
 nnoremap <leader>dc :action ChooseDebugConfiguration<cr>

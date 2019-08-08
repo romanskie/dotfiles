@@ -149,7 +149,7 @@ inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
-"nnoremap ;
+nnoremap ; :
 
 " When jump to next match also center screen
 nnoremap n nzz
@@ -173,9 +173,6 @@ nnoremap <C-W><<> <C-W><r>
 nnoremap <C-W><>> <C-W><R>
 
 " Using Buffers like Tabs
-"nnoremap <Tab> :bnext<CR>
-"nnoremap <S-Tab> :bprevious<CR>
-
 nnoremap <c-n> :bnext<CR>
 nnoremap <c-p> :bprevious<CR>
 nnoremap <c-c> :bp <BAR> bd #<CR>
@@ -193,7 +190,6 @@ let g:grepper.tools         = ['git', 'grep']
 let g:grepper.jump          = 1
 let g:grepper.simple_prompt = 1
 let g:grepper.quickfix      = 0
-
 nnoremap <silent><c-f> :Grepper<cr>
 
 " =====> Nerdtree
@@ -205,19 +201,13 @@ let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let g:NERDTreeWinPos = "left"
 
-"nnoremap <silent><F1> :NERDTreeTabsToggle<CR>
-"nnoremap <silent><F1> :NERDTreeToggle<Enter>
-"noremap <silent><c-m> :NERDTreeToggle .<Enter>
-noremap <silent><c-g> :NERDTreeToggle .<Enter>
+noremap <silent><c-g> :NERDTreeToggle .<cr>
 
 " ===> FZF
 nnoremap <silent><c-t> :Files<cr>
-"nnoremap <silent><leader>t :Files<cr>
-
 nnoremap <silent><c-b> :Buffers<cr>
-"nnoremap <silent><leader>b :Buffers<cr>
 
-let g:fzf_layout = { 'down': '~30%' }
+let g:fzf_layout = { 'down': '~25%' }
 let g:fzf_action = {
             \ 'ctrl-s': 'split',
             \ 'ctrl-v': 'vsplit'
@@ -231,12 +221,10 @@ autocmd  FileType fzf set laststatus=0 noshowmode noruler
 " ===> Airline
 let g:airline_solarized_bg='light'
 set laststatus=2
-set noshowmode               " We show the mode witthih airline or lightline
+set noshowmode
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tmuxline#enabled = 0
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#fnamemod = ':t'
 
 " ===> coc nvim
 if s:is_nvim
@@ -292,14 +280,9 @@ if s:is_nvim
     nmap <silent><leader>rn <Plug>(coc-rename)
     nmap <silent><leader>re <Plug>(coc-rename)
 
-    "inoremap <silent><expr> <c-space> coc#refresh()
     nmap <leader>e <Plug>(coc-diagnostic-next)
     nmap <leader>E <Plug>(coc-diagnostic-prev)
     nnoremap <leader>doc :call <SID>show_documentation()<CR>
-
-    "nmap <leader>F <Plug>(coc-format)
-    "vmap <leader>f <Plug>(coc-format-selected)
-    "nmap <leader>f <Plug>(coc-format-selected)
 
     "clojure
 
