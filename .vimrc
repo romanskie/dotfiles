@@ -51,6 +51,7 @@ set splitright
 
 " Using Buffers like Tabs
 set hidden
+set autoread
 
 " No annoying sound on errors
 set noerrorbells
@@ -169,14 +170,11 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-nnoremap <C-W><<> <C-W><r>
-nnoremap <C-W><>> <C-W><R>
-
 " Using Buffers like Tabs
-nnoremap <c-n> :bnext<CR>
-nnoremap <c-p> :bprevious<CR>
-nnoremap <c-c> :bp <BAR> bd #<CR>
-nnoremap <c-q> :bp <BAR> bd #<CR>
+nnoremap <silent> <c-n> :bnext<CR>
+nnoremap <silent> <c-p> :bprevious<CR>
+nnoremap <silent> <c-c> :bp <BAR> bd #<CR>
+nnoremap <silent> <c-q> :bp <BAR> bd #<CR>
 
 " Save with double esc
 map <Esc><Esc> :w<CR>
@@ -206,6 +204,7 @@ noremap <silent><c-g> :NERDTreeToggle .<cr>
 " ===> FZF
 nnoremap <silent><c-t> :Files<cr>
 nnoremap <silent><c-b> :Buffers<cr>
+nnoremap <silent><c-r> :History:<cr>
 
 let g:fzf_layout = { 'down': '~25%' }
 let g:fzf_action = {
@@ -223,12 +222,13 @@ let g:airline_solarized_bg='light'
 set laststatus=2
 set noshowmode
 let g:airline_powerline_fonts = 1
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#fnamemod = ':t'
+
+"fireplace
+nmap <leader>ev <Plug>FireplaceCountPrint
+nnoremap <silent><leader>rq :Require<cr>
 
 " ===> coc nvim
 if s:is_nvim
-
     let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
     let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
     let g:LanguageClient_settingsPath=".lsp/settings.json"
@@ -278,27 +278,11 @@ if s:is_nvim
 
     nmap <silent><leader>rf :Format<cr>
     nmap <silent><leader>rn <Plug>(coc-rename)
-    nmap <silent><leader>re <Plug>(coc-rename)
+
 
     nmap <leader>e <Plug>(coc-diagnostic-next)
     nmap <leader>E <Plug>(coc-diagnostic-prev)
     nnoremap <leader>doc :call <SID>show_documentation()<CR>
-
-    "clojure
-
-    nnoremap <silent> crcc :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'cycle-coll', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-    nnoremap <silent> crth :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-first', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-    nnoremap <silent> crtt :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-last', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-    nnoremap <silent> crtf :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-first-all', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-    nnoremap <silent> crtl :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'thread-last-all', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-    nnoremap <silent> cruw :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'unwind-thread', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-    nnoremap <silent> crua :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'unwind-all', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-    nnoremap <silent> crml :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'move-to-let', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1, input('Binding name: ')]})<CR>
-    nnoremap <silent> cril :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'introduce-let', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1, input('Binding name: ')]})<CR>
-    nnoremap <silent> crel :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'expand-let', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-    nnoremap <silent> cram :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'add-missing-libspec', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-    nnoremap <silent> crcn :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'clean-ns', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1]})<CR>
-    nnoremap <silent> cref :call CocRequest('clojure-lsp', 'workspace/executeCommand', {'command': 'extract-function', 'arguments': [Expand('%:p'), line('.') - 1, col('.') - 1, input('Function name: ')]})<CR>
 
 endif
 
