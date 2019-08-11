@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#WARNING! THIS DOES NOT WORK PROPERLY ATM
+
 set -o errexit
 set -o nounset
 

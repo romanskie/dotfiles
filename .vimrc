@@ -129,7 +129,7 @@ endtry
 let mapleader = " "
 
 " Disable recording
-map q <Nop>
+"map q <Nop>
 
 " Visual linewise up and down by default (and use gj gk to go quicker)
 nnoremap j gj
@@ -174,7 +174,6 @@ nnoremap <C-H> <C-W><C-H>
 nnoremap <silent> <c-n> :bnext<CR>
 nnoremap <silent> <c-p> :bprevious<CR>
 nnoremap <silent> <c-c> :bp <BAR> bd #<CR>
-nnoremap <silent> <c-q> :bp <BAR> bd #<CR>
 
 " Save with double esc
 map <Esc><Esc> :w<CR>
@@ -314,5 +313,3 @@ autocmd BufReadPost *
             \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
             \   exe "normal g`\"" |
             \ endif
-
-
