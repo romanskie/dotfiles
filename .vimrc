@@ -23,7 +23,7 @@ Plug 'ryanoasis/vim-devicons'
 
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
-Plug 'christoomey/vim-tmux-navigator'
+"Plug 'christoomey/vim-tmux-navigator'
 Plug 'luochen1990/rainbow'
 
 Plug 'tpope/vim-fireplace'
@@ -130,6 +130,7 @@ let mapleader = " "
 
 " Disable recording
 "map q <Nop>
+map <C-W><C-Q> <Nop>
 
 " Visual linewise up and down by default (and use gj gk to go quicker)
 nnoremap j gj
@@ -171,9 +172,9 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " Using Buffers like Tabs
-nnoremap <silent> <c-n> :bnext<CR>
-nnoremap <silent> <c-p> :bprevious<CR>
-nnoremap <silent> <c-c> :bp <BAR> bd #<CR>
+nnoremap <silent> <C-N> :bnext<CR>
+nnoremap <silent> <C-P> :bprevious<CR>
+nnoremap <silent> <C-C> :bp <BAR> bd #<CR>
 
 " Save with double esc
 map <Esc><Esc> :w<CR>
@@ -198,11 +199,11 @@ let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let g:NERDTreeWinPos = "left"
 
-noremap <silent><c-g> :NERDTreeToggle .<cr>
+noremap <silent><F1> :NERDTreeToggle .<cr>
 
 " ===> FZF
 nnoremap <silent><c-t> :Files<cr>
-nnoremap <silent><c-b> :Buffers<cr>
+nnoremap <silent> <C-B> :Buffers<cr>
 nnoremap <silent><c-r> :History:<cr>
 
 let g:fzf_layout = { 'down': '~25%' }
@@ -277,7 +278,6 @@ if s:is_nvim
 
     nmap <silent><leader>rf :Format<cr>
     nmap <silent><leader>rn <Plug>(coc-rename)
-
 
     nmap <leader>e <Plug>(coc-diagnostic-next)
     nmap <leader>E <Plug>(coc-diagnostic-prev)
