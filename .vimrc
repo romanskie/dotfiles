@@ -9,7 +9,7 @@ Plug 'Townk/vim-autoclose'
 
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
+"Plug 'tpope/vim-surround'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -23,12 +23,13 @@ Plug 'ryanoasis/vim-devicons'
 
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
-"Plug 'christoomey/vim-tmux-navigator'
 Plug 'luochen1990/rainbow'
 
 Plug 'tpope/vim-fireplace'
-Plug 'tpope/vim-sexp-mappings-for-regular-people'
-Plug 'guns/vim-sexp'
+"Plug 'tpope/vim-sexp-mappings-for-regular-people'
+"Plug 'guns/vim-sexp'
+Plug 'kovisoft/paredit'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 
 if s:is_nvim
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -129,7 +130,7 @@ endtry
 let mapleader = " "
 
 " Disable recording
-"map q <Nop>
+map q <Nop>
 map <C-W><C-Q> <Nop>
 
 " Visual linewise up and down by default (and use gj gk to go quicker)
@@ -202,8 +203,9 @@ let g:NERDTreeWinPos = "left"
 noremap <silent><F1> :NERDTreeToggle .<cr>
 
 " ===> FZF
-nnoremap <silent><c-t> :Files<cr>
-nnoremap <silent> <C-B> :Buffers<cr>
+"nnoremap <silent><c-t> :Files<cr>
+nnoremap <silent><c-t> :GFiles<cr>
+nnoremap <silent><c-b> :Buffers<cr>
 nnoremap <silent><c-r> :History:<cr>
 
 let g:fzf_layout = { 'down': '~25%' }
@@ -236,12 +238,28 @@ if s:is_nvim
 
     " Highlight symbol under cursor on CursorHold
     autocmd CursorHold * silent call CocActionAsync('highlight')
-
     autocmd User CocLocationsChange CocList --normal location
-
     autocmd BufReadCmd,FileReadCmd,SourceCmd jar:file://* call s:LoadClojureContent(expand("<amatch>"))
-
     command! -nargs=0 Format :call CocAction('format')
+
+    " Movement within 'ins-completion-menu'
+    imap <expr><C-j>   pumvisible() ? "\<Down>" : "\<C-j>"
+    imap <expr><C-k>   pumvisible() ? "\<Up>" : "\<C-k>"
+    imap <expr><C-n>   pumvisible() ? "\<Down>" : "\<C-n>"
+    imap <expr><C-p>   pumvisible() ? "\<Up>" : "\<C-p>"
+
+    " Remap keys for gotos
+    nmap <silent><leader>gd <Plug>(coc-definition)
+    nmap <silent><leader>gy <Plug>(coc-type-definition)
+    nmap <silent><leader>gi <Plug>(coc-implementation)
+    nmap <silent><leader>gr <Plug>(coc-references)
+
+    nmap <silent><leader>rf :Format<cr>
+    nmap <silent><leader>rn <Plug>(coc-rename)
+
+    nmap <leader>e <Plug>(coc-diagnostic-next)
+    nmap <leader>E <Plug>(coc-diagnostic-prev)
+    nnoremap <leader>doc :call <SID>show_documentation()<CR>
 
     function! s:show_documentation()
         if &filetype == 'vim'
@@ -263,25 +281,6 @@ if s:is_nvim
         setl nomodified
         setl readonly
     endfunction
-
-    " Movement within 'ins-completion-menu'
-    imap <expr><C-j>   pumvisible() ? "\<Down>" : "\<C-j>"
-    imap <expr><C-k>   pumvisible() ? "\<Up>" : "\<C-k>"
-    imap <expr><C-n>   pumvisible() ? "\<Down>" : "\<C-n>"
-    imap <expr><C-p>   pumvisible() ? "\<Up>" : "\<C-p>"
-
-    " Remap keys for gotos
-    nmap <silent><leader>gd <Plug>(coc-definition)
-    nmap <silent><leader>gy <Plug>(coc-type-definition)
-    nmap <silent><leader>gi <Plug>(coc-implementation)
-    nmap <silent><leader>gr <Plug>(coc-references)
-
-    nmap <silent><leader>rf :Format<cr>
-    nmap <silent><leader>rn <Plug>(coc-rename)
-
-    nmap <leader>e <Plug>(coc-diagnostic-next)
-    nmap <leader>E <Plug>(coc-diagnostic-prev)
-    nnoremap <leader>doc :call <SID>show_documentation()<CR>
 
 endif
 
