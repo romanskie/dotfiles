@@ -203,7 +203,7 @@ noremap <silent><F1> :NERDTreeToggle .<cr>
 
 " ===> FZF
 "nnoremap <silent><c-t> :Files<cr>
-nnoremap <silent><c-t> :GFiles --cached --others<cr>
+nnoremap <silent><c-t> :GFiles --cached --others --exclude-standard<cr>
 nnoremap <silent><c-b> :Buffers<cr>
 nnoremap <silent><c-r> :History:<cr>
 
