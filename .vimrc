@@ -9,7 +9,8 @@ Plug 'Townk/vim-autoclose'
 
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
-"Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fireplace'
+Plug 'kovisoft/paredit'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -25,10 +26,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'luochen1990/rainbow'
 
-Plug 'tpope/vim-fireplace'
-"Plug 'tpope/vim-sexp-mappings-for-regular-people'
-"Plug 'guns/vim-sexp'
-Plug 'kovisoft/paredit'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 
 if s:is_nvim
@@ -186,8 +183,10 @@ nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
 " ===> Grepper Settings
 let g:grepper               = {}
 let g:grepper.tools         = ['git', 'grep']
-let g:grepper.jump          = 1
+let g:grepper.jump          = 0
+let g:grepper.switch        = 1
 let g:grepper.simple_prompt = 1
+let g:grepper.highlight     = 1
 let g:grepper.quickfix      = 0
 nnoremap <silent><c-f> :Grepper<cr>
 
