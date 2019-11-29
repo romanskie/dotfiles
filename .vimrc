@@ -16,17 +16,17 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'
 Plug 'mhinz/vim-grepper'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 
 Plug 'lifepillar/vim-solarized8'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
+Plug 'miyakogi/conoline.vim'
 
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'luochen1990/rainbow'
-
-Plug 'tmux-plugins/vim-tmux-focus-events'
 
 if s:is_nvim
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -186,8 +186,8 @@ let g:grepper.tools         = ['git', 'grep']
 let g:grepper.jump          = 0
 let g:grepper.switch        = 1
 let g:grepper.simple_prompt = 1
+let g:grepper.open          = 1
 let g:grepper.highlight     = 1
-let g:grepper.quickfix      = 0
 nnoremap <silent><c-f> :Grepper<cr>
 
 " =====> Nerdtree
