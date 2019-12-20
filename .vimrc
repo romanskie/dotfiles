@@ -4,8 +4,10 @@ let s:vim_plugged_path = $vim_path.'/plugged'
 
 call plug#begin(s:vim_plugged_path)
 
-Plug 'sheerun/vim-polyglot'
+"Plug 'sheerun/vim-polyglot'
 Plug 'Townk/vim-autoclose'
+Plug 'guns/vim-clojure-highlight'
+Plug 'guns/vim-clojure-static'
 
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
@@ -28,6 +30,9 @@ Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'luochen1990/rainbow'
 
+Plug 'mhinz/vim-signify'
+Plug 'christoomey/vim-conflicted'
+
 if s:is_nvim
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 endif
@@ -35,11 +40,16 @@ endif
 call plug#end()
 
 " ===> Settings
-syntax on
+syntax enable
+filetype plugin indent on
 set termguicolors
 set background=light
 colorscheme solarized8
+
 let g:rainbow_active = 1
+
+" default updatetime 4000ms is not good for async update
+set updatetime=100
 
 set clipboard+=unnamedplus
 
@@ -109,9 +119,6 @@ set hlsearch
 set ignorecase
 set smartcase
 
-" Smaller updatetime for CursorHold & CursorHoldI
-set updatetime=300
-
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
 
@@ -126,8 +133,10 @@ endtry
 " ===> Mappings/Bindings
 let mapleader = " "
 
-" Disable recording
-map q <Nop>
+"apply macros with q
+nnoremap Q @q
+vnoremap Q :norm @q<cr>
+
 map <C-W><C-Q> <Nop>
 
 " Visual linewise up and down by default (and use gj gk to go quicker)
@@ -220,9 +229,24 @@ autocmd  FileType fzf set laststatus=0 noshowmode noruler
 
 " ===> Airline
 let g:airline_solarized_bg='light'
+let g:airline_powerline_fonts = 1
 set laststatus=2
 set noshowmode
-let g:airline_powerline_fonts = 1
+
+"Signify Configuration:
+nnoremap <leader>di :SignifyDiff<cr>
+nnoremap <leader>dh :SignifyHunkDiff<cr>
+nnoremap <leader>uh :SignifyHunkUndo<cr>
+
+" hunk jumping
+nmap <leader>nh <plug>(signify-next-hunk)
+nmap <leader>ph <plug>(signify-prev-hunk)
+
+" hunk text object
+omap ic <plug>(signify-motion-inner-pending)
+xmap ic <plug>(signify-motion-inner-visual)
+omap ac <plug>(signify-motion-outer-pending)
+xmap ac <plug>(signify-motion-outer-visual)
 
 "fireplace
 nmap <leader>ev <Plug>FireplaceCountPrint
