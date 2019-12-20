@@ -9,6 +9,20 @@ if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] &&
   tmux attach-session -t "$TMUX_DEFAULT_SESSION" 2>/dev/null || (tmux new-session -d -s $TMUX_DEFAULT_SESSION && tmux attach-session -t "$TMUX_DEFAULT_SESSION"); return
 fi
 
+# pass files or dirs to cd
+cd_ () {
+    if [[ -d ${1} ]]; then
+        #echo ${1} is a directory"
+        cd ${1}
+    elif [[ -f ${1} ]]; then
+        #echo ${1} is a file"
+        cd $(dirname "${1}")
+    else
+        #echo ${1} is not valid"
+        exit 1
+    fi
+}
+
 # Avoid duplicates
 export HISTCONTROL=ignoredups:erasedups
 # When the shell exits, append to the history file instead of overwriting it
@@ -25,6 +39,7 @@ alias ping='ping -c 5'
 alias c='clear'
 
 ## a quick way to get out of current directory ##
+alias cd='cd_'
 alias ..='cd ..'
 alias ...='cd ../../../'
 alias ....='cd ../../../../'
