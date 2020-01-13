@@ -31,6 +31,7 @@ Plug 'jistr/vim-nerdtree-tabs'
 Plug 'luochen1990/rainbow'
 
 Plug 'mhinz/vim-signify'
+Plug 'mhinz/vim-startify'
 Plug 'christoomey/vim-conflicted'
 
 if s:is_nvim
@@ -258,6 +259,7 @@ if s:is_nvim
     let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
     let g:LanguageClient_settingsPath=".lsp/settings.json"
     let g:coc_enable_locationlist = 0
+
 
     " Highlight symbol under cursor on CursorHold
     autocmd CursorHold * silent call CocActionAsync('highlight')
