@@ -8,6 +8,7 @@ call plug#begin(s:vim_plugged_path)
 Plug 'Townk/vim-autoclose'
 Plug 'guns/vim-clojure-highlight'
 Plug 'guns/vim-clojure-static'
+Plug 'martinda/Jenkinsfile-vim-syntax'
 
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
@@ -189,6 +190,11 @@ map <Esc><Esc> :w<CR>
 
 " cancle search with esc
 nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
+
+" ===> vim-conflicted
+" Use `gl` and `gr` rather than the default conflicted diffget mappings
+let g:diffget_local_map = 'gl'
+let g:diffget_upstream_map = 'gr'
 
 " ===> Grepper Settings
 let g:grepper               = {}
