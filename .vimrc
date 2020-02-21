@@ -4,14 +4,20 @@ let s:vim_plugged_path = $vim_path.'/plugged'
 
 call plug#begin(s:vim_plugged_path)
 
-"Plug 'sheerun/vim-polyglot'
 Plug 'Townk/vim-autoclose'
 Plug 'guns/vim-clojure-highlight'
 Plug 'guns/vim-clojure-static'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 
+Plug 'luochen1990/rainbow'
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'mhinz/vim-startify'
+
+Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
+
 Plug 'tpope/vim-fireplace'
 Plug 'kovisoft/paredit'
 
@@ -26,14 +32,6 @@ Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'miyakogi/conoline.vim'
-
-Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'luochen1990/rainbow'
-
-Plug 'mhinz/vim-signify'
-Plug 'mhinz/vim-startify'
-Plug 'christoomey/vim-conflicted'
 
 if s:is_nvim
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -138,7 +136,6 @@ let mapleader = " "
 "apply macros with q
 nnoremap Q @q
 vnoremap Q :norm @q<cr>
-
 map <C-W><C-Q> <Nop>
 
 " Visual linewise up and down by default (and use gj gk to go quicker)
@@ -186,15 +183,10 @@ nnoremap <silent> <C-P> :bprevious<CR>
 nnoremap <silent> <C-C> :bp <BAR> bd #<CR>
 
 " Save with double esc
-map <Esc><Esc> :w<CR>
+map <silent><Esc><Esc> :w<CR>
 
 " cancle search with esc
 nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
-
-" ===> vim-conflicted
-" Use `gl` and `gr` rather than the default conflicted diffget mappings
-let g:diffget_local_map = 'gl'
-let g:diffget_upstream_map = 'gr'
 
 " ===> Grepper Settings
 let g:grepper               = {}
@@ -240,7 +232,7 @@ let g:airline_powerline_fonts = 1
 set laststatus=2
 set noshowmode
 
-"Signify Configuration:
+" signify Configuration:
 nnoremap <leader>di :SignifyDiff<cr>
 nnoremap <leader>dh :SignifyHunkDiff<cr>
 nnoremap <leader>uh :SignifyHunkUndo<cr>
@@ -265,7 +257,6 @@ if s:is_nvim
     let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
     let g:LanguageClient_settingsPath=".lsp/settings.json"
     let g:coc_enable_locationlist = 0
-
 
     " Highlight symbol under cursor on CursorHold
     autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -314,7 +305,6 @@ if s:is_nvim
     endfunction
 
 endif
-
 
 " ===> Commands
 autocmd BufWritePre * :%s/\s\+$//e "/dealing with whitespaces
