@@ -178,9 +178,12 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " Using Buffers like Tabs
+nnoremap <silent> <Tab> :bnext<CR>
+nnoremap <silent> <S-Tab> :bprevious<CR>
 nnoremap <silent> <C-N> :bnext<CR>
 nnoremap <silent> <C-P> :bprevious<CR>
 nnoremap <silent> <C-C> :bp <BAR> bd #<CR>
+nnoremap <silent> <C-Q> :bp <BAR> bd #<CR>
 
 " Save with double esc
 map <silent><Esc><Esc> :w<CR>
@@ -190,7 +193,7 @@ nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
 
 " ===> Grepper Settings
 let g:grepper               = {}
-let g:grepper.tools         = ['git', 'grep']
+let g:grepper.tools         = ['grep']
 let g:grepper.jump          = 0
 let g:grepper.switch        = 1
 let g:grepper.simple_prompt = 1
@@ -255,7 +258,7 @@ nnoremap <silent><leader>rq :Require<cr>
 if s:is_nvim
     let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
     let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
-    let g:LanguageClient_settingsPath=".lsp/settings.json"
+    let g:LanguageClient_settingsPath="$HOME/.lsp/settings.json"
     let g:coc_enable_locationlist = 0
 
     " Highlight symbol under cursor on CursorHold
