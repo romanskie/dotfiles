@@ -6,8 +6,7 @@
 	editor = vi
 [alias]
 	plog = log --graph --pretty=format:'%h -%d %s %n' --abbrev-commit --date=relative --branches
-    conflicted = '!vim +Conflicted'
 [merge]
-    tool = conflicted
-[mergetool "conflicted"]
-    cmd = git conflicted
+    tool = vi
+[mergetool "vi"]
+    cmd = vi -f -c \"Gvdiffsplit!\" \"$MERGED\"

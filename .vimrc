@@ -193,7 +193,7 @@ nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
 
 " ===> Grepper Settings
 let g:grepper               = {}
-let g:grepper.tools         = ['grep']
+let g:grepper.tools         = ['git', 'grep']
 let g:grepper.jump          = 0
 let g:grepper.switch        = 1
 let g:grepper.simple_prompt = 1
@@ -211,9 +211,10 @@ let NERDTreeDirArrows = 1
 let g:NERDTreeWinPos = "left"
 
 noremap <silent><F1> :NERDTreeToggle .<cr>
+noremap <silent><c-^> :NERDTreeToggle .<cr>
 
 " ===> FZF
-"nnoremap <silent><c-t> :Files<cr>
+"nnoremap <silent><c-t> :Files <cr>
 nnoremap <silent><c-t> :GFiles --cached --others --exclude-standard<cr>
 nnoremap <silent><c-b> :Buffers<cr>
 nnoremap <silent><c-r> :History:<cr>
