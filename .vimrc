@@ -10,13 +10,12 @@ Plug 'guns/vim-clojure-static'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 
 Plug 'luochen1990/rainbow'
-Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
 Plug 'mhinz/vim-startify'
 
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-vinegar'
 
 Plug 'tpope/vim-fireplace'
 Plug 'kovisoft/paredit'
@@ -201,18 +200,6 @@ let g:grepper.open          = 1
 let g:grepper.highlight     = 1
 nnoremap <silent><c-f> :Grepper<cr>
 
-" =====> Nerdtree
-let NERDTreeShowHidden=1 "Display hidden files:
-let g:NERDTreeWinSize=40
-let NERDTreeIgnore=['\.DS_Store', '\~$', '\.swp']
-let NERDTreeAutoDeleteBuffer = 1
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-let g:NERDTreeWinPos = "left"
-
-noremap <silent><F1> :NERDTreeToggle .<cr>
-noremap <silent><c-^> :NERDTreeToggle .<cr>
-
 " ===> FZF
 "nnoremap <silent><c-t> :Files <cr>
 nnoremap <silent><c-t> :GFiles --cached --others --exclude-standard<cr>
@@ -230,9 +217,6 @@ autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
             \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
-" ===> Airline
-let g:airline_solarized_bg='light'
-let g:airline_powerline_fonts = 1
 set laststatus=2
 set noshowmode
 
