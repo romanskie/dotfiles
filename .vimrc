@@ -1,16 +1,10 @@
-let s:is_nvim = has('nvim')
-let $vim_path = $HOME.(s:is_nvim ? '/.config/nvim' : '/.vim')
+let $vim_path = $HOME.'/.vim'
 let s:vim_plugged_path = $vim_path.'/plugged'
 
 call plug#begin(s:vim_plugged_path)
 
 Plug 'Townk/vim-autoclose'
-Plug 'guns/vim-clojure-highlight'
-Plug 'guns/vim-clojure-static'
-Plug 'martinda/Jenkinsfile-vim-syntax'
-
 Plug 'luochen1990/rainbow'
-Plug 'mhinz/vim-startify'
 
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-eunuch'
@@ -189,6 +183,10 @@ map <silent><Esc><Esc> :w<CR>
 " cancle search with esc
 nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
 
+" Git settingss
+" Avoid whitespace comparison
+set diffopt+=iwhite
+
 " ===> Grepper Settings
 let g:grepper               = {}
 let g:grepper.tools         = ['git', 'grep']
@@ -220,13 +218,13 @@ set laststatus=2
 set noshowmode
 
 " signify Configuration:
-nnoremap <leader>di :SignifyDiff<cr>
-nnoremap <leader>dh :SignifyHunkDiff<cr>
-nnoremap <leader>uh :SignifyHunkUndo<cr>
+nnoremap <leader>sd :SignifyDiff<cr>
+nnoremap <leader>hd :SignifyHunkDiff<cr>
+nnoremap <leader>hu :SignifyHunkUndo<cr>
 
 " hunk jumping
-nmap <leader>nh <plug>(signify-next-hunk)
-nmap <leader>ph <plug>(signify-prev-hunk)
+nmap <leader>hn <plug>(signify-next-hunk)
+nmap <leader>hp <plug>(signify-prev-hunk)
 
 " hunk text object
 omap ic <plug>(signify-motion-inner-pending)
