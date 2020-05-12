@@ -16,6 +16,7 @@ Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-vinegar'
+Plug 'sheerun/vim-polyglot'
 
 Plug 'tpope/vim-fireplace'
 Plug 'kovisoft/paredit'
@@ -26,15 +27,13 @@ Plug 'airblade/vim-rooter'
 Plug 'mhinz/vim-grepper'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 
-Plug 'lifepillar/vim-solarized8'
+Plug 'romainl/flattened'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'miyakogi/conoline.vim'
 
-if s:is_nvim
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-endif
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
@@ -42,8 +41,7 @@ call plug#end()
 syntax enable
 filetype plugin indent on
 set termguicolors
-set background=light
-colorscheme solarized8
+colorscheme flattened_light
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
@@ -52,7 +50,7 @@ let g:rainbow_active = 1
 " default updatetime 4000ms is not good for async update
 set updatetime=100
 
-set clipboard+=unnamedplus
+set clipboard=unnamedplus
 
 " More natural split opening
 set splitbelow
@@ -242,60 +240,57 @@ nmap <leader>ev <Plug>FireplaceCountPrint
 nnoremap <silent><leader>rq :Require<cr>
 
 " ===> coc nvim
-if s:is_nvim
-    let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-    let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
-    let g:LanguageClient_settingsPath="$HOME/.lsp/settings.json"
-    let g:coc_enable_locationlist = 0
+let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+let g:LanguageClient_settingsPath="$HOME/.lsp/settings.json"
+let g:coc_enable_locationlist = 0
 
-    " Highlight symbol under cursor on CursorHold
-    autocmd CursorHold * silent call CocActionAsync('highlight')
-    autocmd User CocLocationsChange CocList --normal location
-    autocmd BufReadCmd,FileReadCmd,SourceCmd jar:file://* call s:LoadClojureContent(expand("<amatch>"))
-    command! -nargs=0 Format :call CocAction('format')
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+autocmd User CocLocationsChange CocList --normal location
+autocmd BufReadCmd,FileReadCmd,SourceCmd jar:file://* call s:LoadClojureContent(expand("<amatch>"))
+command! -nargs=0 Format :call CocAction('format')
 
-    " Movement within 'ins-completion-menu'
-    imap <expr><C-j>   pumvisible() ? "\<Down>" : "\<C-j>"
-    imap <expr><C-k>   pumvisible() ? "\<Up>" : "\<C-k>"
-    imap <expr><C-n>   pumvisible() ? "\<Down>" : "\<C-n>"
-    imap <expr><C-p>   pumvisible() ? "\<Up>" : "\<C-p>"
+" Movement within 'ins-completion-menu'
+imap <expr><C-j>   pumvisible() ? "\<Down>" : "\<C-j>"
+imap <expr><C-k>   pumvisible() ? "\<Up>" : "\<C-k>"
+imap <expr><C-n>   pumvisible() ? "\<Down>" : "\<C-n>"
+imap <expr><C-p>   pumvisible() ? "\<Up>" : "\<C-p>"
 
-    " Remap keys for gotos
-    nmap <silent><leader>gd <Plug>(coc-definition)
-    nmap <silent><leader>gy <Plug>(coc-type-definition)
-    nmap <silent><leader>gi <Plug>(coc-implementation)
-    nmap <silent><leader>gr <Plug>(coc-references)
-    nmap <silent><leader>c :CocCommand<cr>
+" Remap keys for gotos
+nmap <silent><leader>gd <Plug>(coc-definition)
+nmap <silent><leader>gy <Plug>(coc-type-definition)
+nmap <silent><leader>gi <Plug>(coc-implementation)
+nmap <silent><leader>gr <Plug>(coc-references)
+nmap <silent><leader>co :CocCommand<cr>
 
-    nmap <silent><leader>rf :Format<cr>
-    nmap <silent><leader>rn <Plug>(coc-rename)
+nmap <silent><leader>rf :Format<cr>
+nmap <silent><leader>rn <Plug>(coc-rename)
 
-    nmap <leader>e <Plug>(coc-diagnostic-next)
-    nmap <leader>E <Plug>(coc-diagnostic-prev)
-    nnoremap <leader>doc :call <SID>show_documentation()<CR>
+nmap <leader>e <Plug>(coc-diagnostic-next)
+nmap <leader>E <Plug>(coc-diagnostic-prev)
+nnoremap <leader>doc :call <SID>show_documentation()<CR>
 
-    function! s:show_documentation()
-        if &filetype == 'vim'
-            execute 'h '.expand('<cword>')
-        else
-            call CocAction('doHover')
-        endif
-    endfunction
+function! s:show_documentation()
+    if &filetype == 'vim'
+        execute 'h '.expand('<cword>')
+    else
+        call CocAction('doHover')
+    endif
+endfunction
 
-    function! Expand(exp) abort
-        let l:result = expand(a:exp)
-        return l:result ==# '' ? '' : "file://" . l:result
-    endfunction
+function! Expand(exp) abort
+    let l:result = expand(a:exp)
+    return l:result ==# '' ? '' : "file://" . l:result
+endfunction
 
-    function! s:LoadClojureContent(uri)
-        setfiletype clojure
-        let content = CocRequest('clojure-lsp', 'clojure/dependencyContents', {'uri': a:uri})
-        call setline(1, split(content, "\n"))
-        setl nomodified
-        setl readonly
-    endfunction
-
-endif
+function! s:LoadClojureContent(uri)
+    setfiletype clojure
+    let content = CocRequest('clojure-lsp', 'clojure/dependencyContents', {'uri': a:uri})
+    call setline(1, split(content, "\n"))
+    setl nomodified
+    setl readonly
+endfunction
 
 " ===> Commands
 autocmd BufWritePre * :%s/\s\+$//e "/dealing with whitespaces
