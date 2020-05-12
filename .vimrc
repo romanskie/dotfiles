@@ -16,7 +16,6 @@ Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-vinegar'
-Plug 'sheerun/vim-polyglot'
 
 Plug 'tpope/vim-fireplace'
 Plug 'kovisoft/paredit'
