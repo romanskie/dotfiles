@@ -122,6 +122,9 @@ try
 catch
 endtry
 
+set laststatus=2
+set noshowmode
+
 " ===> Mappings/Bindings
 let mapleader = " "
 
@@ -198,11 +201,11 @@ let g:grepper.highlight     = 1
 nnoremap <silent><c-f> :Grepper<cr>
 
 " ===> FZF
-"nnoremap <silent><c-t> :Files <cr>
 nnoremap <silent><c-t> :GFiles --cached --others --exclude-standard<cr>
 nnoremap <silent><c-b> :Buffers<cr>
 nnoremap <silent><c-r> :History:<cr>
 
+let g:fzf_preview_window = ''
 let g:fzf_layout = { 'down': '~25%' }
 let g:fzf_action = {
             \ 'ctrl-s': 'split',
@@ -214,10 +217,8 @@ autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
             \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
-set laststatus=2
-set noshowmode
 
-" signify Configuration:
+" ===> signify Configuration:
 nnoremap <leader>sd :SignifyDiff<cr>
 nnoremap <leader>hd :SignifyHunkDiff<cr>
 nnoremap <leader>hu :SignifyHunkUndo<cr>
@@ -232,7 +233,7 @@ xmap ic <plug>(signify-motion-inner-visual)
 omap ac <plug>(signify-motion-outer-pending)
 xmap ac <plug>(signify-motion-outer-visual)
 
-"fireplace
+" ===> fireplace
 nmap <leader>ev <Plug>FireplaceCountPrint
 nnoremap <silent><leader>rq :Require<cr>
 
@@ -244,9 +245,18 @@ let g:coc_enable_locationlist = 0
 
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
+
 autocmd User CocLocationsChange CocList --normal location
 autocmd BufReadCmd,FileReadCmd,SourceCmd jar:file://* call s:LoadClojureContent(expand("<amatch>"))
+
+" Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
 
 " Movement within 'ins-completion-menu'
 imap <expr><C-j>   pumvisible() ? "\<Down>" : "\<C-j>"
@@ -262,6 +272,7 @@ nmap <silent><leader>gr <Plug>(coc-references)
 nmap <silent><leader>co :CocCommand<cr>
 
 nmap <silent><leader>rf :Format<cr>
+nmap <silent><leader>oi :OR<cr>
 nmap <silent><leader>rn <Plug>(coc-rename)
 
 nmap <leader>e <Plug>(coc-diagnostic-next)
@@ -269,11 +280,11 @@ nmap <leader>E <Plug>(coc-diagnostic-prev)
 nnoremap <leader>doc :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-    if &filetype == 'vim'
-        execute 'h '.expand('<cword>')
-    else
-        call CocAction('doHover')
-    endif
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
 endfunction
 
 function! Expand(exp) abort
@@ -290,7 +301,8 @@ function! s:LoadClojureContent(uri)
 endfunction
 
 " ===> Commands
-autocmd BufWritePre * :%s/\s\+$//e "/dealing with whitespaces
+" dealing with whitespaces
+autocmd BufWritePre * :%s/\s\+$//e
 
 " add yaml stuffs
 au! BufNewFile,BufReadPost *.{yaml,yml,jinja} set filetype=yaml

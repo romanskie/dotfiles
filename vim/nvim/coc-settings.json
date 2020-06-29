@@ -1,0 +1,16 @@
+{
+  "diagnostic.virtualText": false,
+  "suggest.snippetIndicator": "🍦",
+  "languageserver": {
+    "clojure-lsp": {
+      "command": "bash",
+      "args": ["-c", "~/bin/clojure-lsp"],
+      "filetypes": ["clojure"],
+      "rootPatterns": ["project.clj", "build.boot", "deps.edn"],
+      "additionalSchemes": ["jar", "zipfile"],
+      "trace.server": "verbose",
+      "initializationOptions": {}
+    }
+  },
+  "java.errors.incompleteClasspath.severity": "ignore"
+}
