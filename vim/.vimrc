@@ -24,7 +24,6 @@ Plug 'romainl/flattened'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
-Plug 'miyakogi/conoline.vim'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -201,7 +200,8 @@ let g:grepper.highlight     = 1
 nnoremap <silent><c-f> :Grepper<cr>
 
 " ===> FZF
-nnoremap <silent><c-t> :GFiles --cached --others --exclude-standard<cr>
+command! -nargs=0 GFilesOrFiles :execute system('git rev-parse --is-inside-work-tree') =~ 'true' ? 'GFiles' : 'Files $HOME'
+nnoremap <silent><c-t> :GFilesOrFiles<cr>
 nnoremap <silent><c-b> :Buffers<cr>
 nnoremap <silent><c-r> :History:<cr>
 
@@ -259,10 +259,10 @@ command! -nargs=? Fold :call CocAction('fold', <f-args>)
 command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
 
 " Movement within 'ins-completion-menu'
-imap <expr><C-j>   pumvisible() ? "\<Down>" : "\<C-j>"
-imap <expr><C-k>   pumvisible() ? "\<Up>" : "\<C-k>"
-imap <expr><C-n>   pumvisible() ? "\<Down>" : "\<C-n>"
-imap <expr><C-p>   pumvisible() ? "\<Up>" : "\<C-p>"
+imap <expr><C-j> pumvisible() ? "\<Down>" : "\<C-j>"
+imap <expr><C-k> pumvisible() ? "\<Up>" : "\<C-k>"
+imap <expr><C-n> pumvisible() ? "\<Down>" : "\<C-n>"
+imap <expr><C-p> pumvisible() ? "\<Up>" : "\<C-p>"
 
 " Remap keys for gotos
 nmap <silent><leader>gd <Plug>(coc-definition)
@@ -279,12 +279,13 @@ nmap <leader>e <Plug>(coc-diagnostic-next)
 nmap <leader>E <Plug>(coc-diagnostic-prev)
 nnoremap <leader>doc :call <SID>show_documentation()<CR>
 
+
 function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    else
+        call CocAction('doHover')
+    endif
 endfunction
 
 function! Expand(exp) abort
