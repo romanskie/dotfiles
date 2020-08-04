@@ -32,6 +32,10 @@ nnoremap K 5k
 vnoremap J 5j
 vnoremap K 5k
 
+"apply macros with q
+nnoremap Q @q
+vnoremap Q :norm @q<cr>
+
 nnoremap ; :
 
 let mapleader = " "

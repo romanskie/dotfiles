@@ -1,11 +1,14 @@
 {
     "diagnostic.virtualText": false,
+    "python.jediEnabled": false,
+    "java.import.maven.enabled": false,
+    "java.errors.incompleteClasspath.severity": "ignore",
     "languageserver": {
         "clojure-lsp": {
             "command": "bash",
             "args": [
                 "-c",
-                "~/bin/clojure-lsp"
+                "clojure-lsp"
             ],
             "filetypes": [
                 "clojure"
@@ -21,7 +24,14 @@
             ],
             "trace.server": "verbose",
             "initializationOptions": {}
+        },
+        "terraform": {
+            "command": "terraform-lsp",
+            "filetypes": [
+                "terraform",
+                "tf"
+            ],
+            "initializationOptions": {}
         }
-    },
-    "java.errors.incompleteClasspath.severity": "ignore"
+    }
 }
