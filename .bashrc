@@ -2,7 +2,7 @@ export PATH="$HOME/bin:$PATH"
 export TMUX_DEFAULT_SESSION="main"
 export VISUAL=vim
 export EDITOR="$VISUAL"
-export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
+#export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
 
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
   tmux attach-session -t "$TMUX_DEFAULT_SESSION" 2>/dev/null || (tmux new-session -d -s $TMUX_DEFAULT_SESSION && tmux attach-session -t "$TMUX_DEFAULT_SESSION"); return
@@ -54,4 +54,15 @@ source "$BASH_IT"/bash_it.sh
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+export SDKMAN_DIR="/home/rschader/.sdkman"
+[[ -s "/home/rschader/.sdkman/bin/sdkman-init.sh" ]] && source "/home/rschader/.sdkman/bin/sdkman-init.sh"
+
 complete -C /home/rschader/bin/terraform terraform
+
+export PATH="/home/rschader/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

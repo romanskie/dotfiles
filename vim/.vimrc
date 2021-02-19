@@ -25,8 +25,6 @@ Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
 call plug#end()
 
 " ===> Settings
@@ -217,7 +215,6 @@ autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
             \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
-
 " ===> signify Configuration:
 nnoremap <leader>sd :SignifyDiff<cr>
 nnoremap <leader>hd :SignifyHunkDiff<cr>
@@ -237,69 +234,11 @@ xmap ac <plug>(signify-motion-outer-visual)
 nmap <leader>ev <Plug>FireplaceCountPrint
 nnoremap <silent><leader>rq :Require<cr>
 
-" ===> coc nvim
-let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
-let g:LanguageClient_settingsPath="$HOME/.lsp/settings.json"
-let g:coc_enable_locationlist = 0
-
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-autocmd User CocLocationsChange CocList --normal location
-autocmd BufReadCmd,FileReadCmd,SourceCmd jar:file://* call s:LoadClojureContent(expand("<amatch>"))
-
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
-
-" Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call CocAction('fold', <f-args>)
-
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
-
 " Movement within 'ins-completion-menu'
 imap <expr><C-j> pumvisible() ? "\<Down>" : "\<C-j>"
 imap <expr><C-k> pumvisible() ? "\<Up>" : "\<C-k>"
 imap <expr><C-n> pumvisible() ? "\<Down>" : "\<C-n>"
 imap <expr><C-p> pumvisible() ? "\<Up>" : "\<C-p>"
-
-" Remap keys for gotos
-nmap <silent><leader>gd <Plug>(coc-definition)
-nmap <silent><leader>gy <Plug>(coc-type-definition)
-nmap <silent><leader>gi <Plug>(coc-implementation)
-nmap <silent><leader>gr <Plug>(coc-references)
-nmap <silent><leader>co :CocCommand<cr>
-
-nmap <silent><leader>rf :Format<cr>
-nmap <silent><leader>oi :OR<cr>
-nmap <silent><leader>rn <Plug>(coc-rename)
-
-nmap <leader>e <Plug>(coc-diagnostic-next)
-nmap <leader>E <Plug>(coc-diagnostic-prev)
-nnoremap <leader>doc :call <SID>show_documentation()<CR>
-
-
-function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-        execute 'h '.expand('<cword>')
-    else
-        call CocAction('doHover')
-    endif
-endfunction
-
-function! Expand(exp) abort
-    let l:result = expand(a:exp)
-    return l:result ==# '' ? '' : "file://" . l:result
-endfunction
-
-function! s:LoadClojureContent(uri)
-    setfiletype clojure
-    let content = CocRequest('clojure-lsp', 'clojure/dependencyContents', {'uri': a:uri})
-    call setline(1, split(content, "\n"))
-    setl nomodified
-    setl readonly
-endfunction
 
 " ===> Commands
 " dealing with whitespaces
