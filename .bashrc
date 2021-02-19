@@ -1,6 +1,6 @@
 export PATH="$HOME/bin:$PATH"
 export TMUX_DEFAULT_SESSION="main"
-export VISUAL=vim
+export VISUAL=code -w
 export EDITOR="$VISUAL"
 #export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
 
