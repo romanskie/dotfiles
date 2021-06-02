@@ -1,0 +1,161 @@
+{
+    "files.exclude": {
+        ".vscode": true,
+        "**/.classpath": true,
+        "**/.factorypath": true,
+        "**/.project": true,
+        "**/.coverage": true,
+        "**/*.pyc": true,
+        "**/__pycache__": true,
+        "node_modules/": true,
+        "templates_module/": true,
+        "**/.settings": true
+    },
+    "editor.minimap.enabled": false,
+    "keyboard.dispatch": "keyCode",
+    "workbench.colorTheme": "Solarized Light",
+    "workbench.iconTheme": "vscode-icons",
+    "vim.handleKeys": {
+        "<C-f>": false,
+        "<C-r>": false,
+        "<C-t>": false,
+        "<C-p>": false,
+        "<C-b>": false,
+    },
+    "vim.vimrc.enable": true,
+    "vim.useSystemClipboard": true,
+    "vim.leader": " ",
+    "vim.hlsearch": true,
+    "vim.visualstar": true,
+    "vim.normalModeKeyBindings": [
+        {
+            "before": [
+                ":"
+            ],
+            "commands": [
+                "workbench.action.showCommands",
+            ]
+        },
+        {
+            "before": [
+                "esc"
+            ],
+            "commands": [
+                ":nohl",
+            ]
+        },
+        {
+            "before": [
+                "leader",
+                "g",
+                "d"
+            ],
+            "after": [
+                "g",
+                "d"
+            ]
+        },
+        {
+            "before": [
+                "leader",
+                "e"
+            ],
+            "commands": [
+                "editor.action.marker.nextInFiles"
+            ]
+        },
+        {
+            "before": [
+                "leader",
+                "E"
+            ],
+            "commands": [
+                "editor.action.marker.prevInFiles"
+            ]
+        },
+        {
+            "before": [
+                "leader",
+                "r",
+                "f"
+            ],
+            "commands": [
+                "editor.action.format"
+            ]
+        },
+        {
+            "before": [
+                "leader",
+                "r",
+                "n"
+            ],
+            "commands": [
+                "editor.action.rename"
+            ]
+        },
+        {
+            "before": [
+                "leader",
+                "o",
+                "i"
+            ],
+            "commands": [
+                "editor.action.organizeImports"
+            ]
+
+        },
+        {
+            "before": [
+                "leader",
+                "e",
+                "v"
+            ],
+            "commands": [
+                "clojureVSCode.evalAndShowResult"
+            ]
+
+        },
+    ],
+    "vim.visualModeKeyBindings": [
+        {
+            "before": [
+                ">"
+            ],
+            "commands": [
+                "editor.action.indentLines"
+            ]
+        },
+        {
+            "before": [
+                "<"
+            ],
+            "commands": [
+                "editor.action.outdentLines"
+            ]
+        },
+    ],
+    "explorer.confirmDelete": false,
+    "git.allowForcePush": true,
+    "git.confirmForcePush": false,
+    "sync.autoUpload": true,
+    "sync.autoDownload": true,
+    "sync.gist": "",
+    "sync.forceUpload": true,
+    "sync.forceDownload": true,
+    "sync.quietSync": true,
+    "editor.fontSize": 15,
+    "files.autoSave": "afterDelay",
+    "gitlens.gitCommands.skipConfirmations": [
+        "fetch:command",
+        "stash-push:command",
+        "switch:command",
+        "branch-create:command"
+    ],
+    "debug.allowBreakpointsEverywhere": true,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "terminal.explorerKind": "external",
+    "workbench.sideBar.location": "right",
+    "clojureVSCode.cljfmtVersion": "0.6.8",
+    "clojureVSCode.ciderNReplVersion": "0.25.2",
+    "workbench.editor.enablePreview": false,
+}
