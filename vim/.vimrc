@@ -1,6 +1,11 @@
 let $vim_path = $HOME.'/.vim'
 let s:vim_plugged_path = $vim_path.'/plugged'
-source $vim_path/coc-config.vim
+
+try
+    source $vim_path/coc-config.vim
+catch
+  " No such file? No problem; just ignore it.
+endtry
 
 call plug#begin(s:vim_plugged_path)
 
