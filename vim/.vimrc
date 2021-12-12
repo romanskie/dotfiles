@@ -1,8 +1,11 @@
 let $vim_path = $HOME.'/.vim'
+let $plugins_config_files_path = $vim_path.'/config-files'
 let s:vim_plugged_path = $vim_path.'/plugged'
 
 try
-    source $vim_path/coc-config.vim
+    source $plugins_config_files_path/coc-config.vim
+    source $plugins_config_files_path/grepper-config.vim
+    source $plugins_config_files_path/fzf-config.vim
 catch
   " No such file? No problem; just ignore it.
 endtry
@@ -127,7 +130,7 @@ set shortmess+=c
 " Turn persistent undo on
 " means that you can undo even when you close a buffer/VIM
 try
-    set undodir=$vim_path/undodir
+    set undodir=$vim_path.'/undodir'
     set undofile
 catch
 endtry
@@ -200,29 +203,6 @@ nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
 " Git settingss
 " Avoid whitespace comparison
 set diffopt+=iwhite
-
-" ===> Grepper Settings
-let g:grepper               = {}
-let g:grepper.tools         = ['git', 'grep']
-let g:grepper.jump          = 0
-let g:grepper.switch        = 1
-let g:grepper.simple_prompt = 1
-let g:grepper.open          = 1
-let g:grepper.highlight     = 1
-nnoremap <silent><c-f> :Grepper<cr>
-
-" ===> FZF
-command! -nargs=0 GFilesOrFiles :execute system('git rev-parse --is-inside-work-tree') =~ 'true' ? 'GFiles' : 'Files $HOME'
-nnoremap <silent><c-t> :GFilesOrFiles<cr>
-nnoremap <silent><c-b> :Buffers<cr>
-nnoremap <silent><c-r> :History:<cr>
-
-let g:fzf_preview_window = ''
-let g:fzf_layout = { 'down': '~25%' }
-let g:fzf_action = {
-            \ 'ctrl-s': 'split',
-            \ 'ctrl-v': 'vsplit'
-            \ }
 
 "hide statusline
 autocmd! FileType fzf
