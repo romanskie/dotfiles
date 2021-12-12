@@ -1,35 +1,44 @@
 let $vim_path = $HOME.'/.vim'
 let s:vim_plugged_path = $vim_path.'/plugged'
+source $vim_path/coc-config.vim
 
 call plug#begin(s:vim_plugged_path)
 
 Plug 'Townk/vim-autoclose'
 Plug 'luochen1990/rainbow'
 
-Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-sleuth'
 
-Plug 'tpope/vim-fireplace'
 Plug 'kovisoft/paredit'
+Plug 'Olical/conjure'
+
+Plug 'tpope/vim-dispatch'
+Plug 'clojure-vim/vim-jack-in'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'
+Plug 'airblade/vim-gitgutter'
 Plug 'mhinz/vim-grepper'
-Plug 'tmux-plugins/vim-tmux-focus-events'
 
 Plug 'romainl/flattened'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
 
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 call plug#end()
 
 " ===> Settings
-syntax enable
-filetype plugin indent on
+ syntax enable
+ filetype plugin indent on
+
 set termguicolors
 colorscheme flattened_light
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -48,7 +57,6 @@ set splitright
 
 " Using Buffers like Tabs
 set hidden
-set autoread
 
 " No annoying sound on errors
 set noerrorbells
@@ -114,7 +122,7 @@ set shortmess+=c
 " Turn persistent undo on
 " means that you can undo even when you close a buffer/VIM
 try
-    set undodir=~/.vim/undodir
+    set undodir=$vim_path/undodir
     set undofile
 catch
 endtry
@@ -124,6 +132,7 @@ set noshowmode
 
 " ===> Mappings/Bindings
 let mapleader = " "
+let maplocalleader = " "
 
 "apply macros with q
 nnoremap Q @q
@@ -215,30 +224,14 @@ autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
             \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
-" ===> signify Configuration:
-nnoremap <leader>sd :SignifyDiff<cr>
-nnoremap <leader>hd :SignifyHunkDiff<cr>
-nnoremap <leader>hu :SignifyHunkUndo<cr>
-
-" hunk jumping
-nmap <leader>hn <plug>(signify-next-hunk)
-nmap <leader>hp <plug>(signify-prev-hunk)
-
-" hunk text object
-omap ic <plug>(signify-motion-inner-pending)
-xmap ic <plug>(signify-motion-inner-visual)
-omap ac <plug>(signify-motion-outer-pending)
-xmap ac <plug>(signify-motion-outer-visual)
-
-" ===> fireplace
-nmap <leader>ev <Plug>FireplaceCountPrint
-nnoremap <silent><leader>rq :Require<cr>
-
 " Movement within 'ins-completion-menu'
 imap <expr><C-j> pumvisible() ? "\<Down>" : "\<C-j>"
 imap <expr><C-k> pumvisible() ? "\<Up>" : "\<C-k>"
 imap <expr><C-n> pumvisible() ? "\<Down>" : "\<C-n>"
 imap <expr><C-p> pumvisible() ? "\<Up>" : "\<C-p>"
+
+" esc in terminal mode
+:tnoremap <Esc> <C-\><C-n>
 
 " ===> Commands
 " dealing with whitespaces
