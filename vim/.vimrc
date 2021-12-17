@@ -283,7 +283,7 @@ imap <expr><C-p> pumvisible() ? "\<Up>" : "\<C-p>"
 let g:conjure#log#hud#enabled = v:false
 
 " ===> Coc
-let g:coc_global_extensions = ['coc-json', 'coc-yaml', 'coc-xml', 'coc-highlight', 'coc-vimlsp', 'coc-sh']
+let g:coc_global_extensions = ['coc-json', 'coc-yaml', 'coc-xml', 'coc-highlight', 'coc-vimlsp', 'coc-sh', 'coc-java']
 
 
 " Use tab for trigger completion with characters ahead and navigate.
