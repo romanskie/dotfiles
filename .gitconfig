@@ -1,9 +1,9 @@
 [user]
 	name = Roman Schader
 	email = me@rschader.com
-	user = Roman Schader
+	user = romanskie
 [core]
-	editor = code --wait
+	editor = vim
 [alias]
 	plog = log --graph --pretty=format:'%h -%d %s %n' --abbrev-commit --date=relative --branches
 [merge]
