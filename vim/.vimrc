@@ -36,16 +36,10 @@ call plug#end()
 
 " ===> Settings
 syntax enable
-
 filetype plugin indent on
 
 set termguicolors
-
 colorscheme flattened_light
-
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
 " unicode characters in the file autoload/float.vim
@@ -209,7 +203,9 @@ nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
 set diffopt+=iwhite
 
 " Allow ESC in terminal mode
-:tnoremap <Esc> <C-\><C-n>
+":tnoremap <Esc> <C-\><C-n>
+"
+autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
 
 " ===> Commands
 " Dealing with whitespaces
@@ -260,8 +256,9 @@ command! -nargs=0 GFilesOrFiles :execute system('git rev-parse --is-inside-work-
 nnoremap <silent><c-t> :GFilesOrFiles<cr>
 nnoremap <silent><c-b> :Buffers<cr>
 nnoremap <silent><c-r> :History:<cr>
+tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 
-let g:fzf_preview_window = ''
+let g:fzf_preview_window = []
 let g:fzf_layout = { 'down': '~25%' }
 let g:fzf_action = {
             \ 'ctrl-s': 'split',
@@ -278,6 +275,10 @@ imap <expr><C-j> pumvisible() ? "\<Down>" : "\<C-j>"
 imap <expr><C-k> pumvisible() ? "\<Up>" : "\<C-k>"
 imap <expr><C-n> pumvisible() ? "\<Down>" : "\<C-n>"
 imap <expr><C-p> pumvisible() ? "\<Up>" : "\<C-p>"
+
+" ===> Rooter
+let g:rooter_patterns = ['.git', 'src']
+let g:rooter_change_directory_for_non_project_files = 'home'
 
 " ===> Conjure
 let g:conjure#log#hud#enabled = v:false
