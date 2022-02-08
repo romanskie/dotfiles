@@ -8,6 +8,8 @@ endif
 " ===> Plugins
 call plug#begin(data_dir . '/plugged')
 
+Plug 'akinsho/toggleterm.nvim'
+
 Plug 'Olical/conjure'
 Plug 'Townk/vim-autoclose'
 
@@ -43,6 +45,7 @@ Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-vinegar'
 
 Plug 'vim-airline/vim-airline-themes'
+
 
 call plug#end()
 
