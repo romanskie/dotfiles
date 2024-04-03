@@ -2,12 +2,33 @@
 	name = Roman Schader
 	email = me@rschader.com
 	user = romanskie
+
 [core]
-	editor = vim
+    editor = code --wait
+	excludesfile = /Users/rschader/.gitignore
+
 [alias]
-	plog = log --graph --pretty=format:'%h -%d %s %n' --abbrev-commit --date=relative --branches
+    plog = log --graph --pretty=format:'%h -%d %s %n' --abbrev-commit --date=relative --branches
+
+[diff]
+    tool = vscode
+
+[difftool "vscode"]
+    cmd = code --wait --diff $LOCAL $REMOTE
+
 [merge]
-	tool = vimdiff
-	conflictstyle = diff3
-[mergetool]
-	prompt = false
+    tool = vscode
+    conflictstyle = diff3
+
+[mergetool "vscode"]
+    cmd = code --wait $MERGED
+    prompt = false
+
+[credential]
+	helper = store
+
+[pull]
+	rebase = true
+
+[push]
+	default = current
